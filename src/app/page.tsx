@@ -3,7 +3,7 @@
 'use client'; // 👈 CORRECTION CLÉ : Indique à Next.js qu'il s'agit d'un Client Component
 
 
-// import Link from 'next/link';
+import Link from 'next/link';
 // import Image from 'next/image'; // 👈 OPTIMISATION : Importation du composant Image de Next.js
 import { Carousel, CarouselItem, CarouselCaption } from 'react-bootstrap'; // 👈 Amélioration de l'importation
 
@@ -11,7 +11,13 @@ export default function HomePage() {
   return (
     <div>
       {/* Menu (Composants clients par nature, mais inclus dans un composant parent client) */}
-      <nav className="navbar bg-body-tertiary">
+      <nav 
+      className="navbar bg-body-tertiary navbar-success bg-success"
+      style={{
+        position: 'sticky',
+        top: 0,
+        zIndex: 1000,
+      }}>
         <div className="container-fluid">
           <a className="navbar-brand">DOT KICC</a>
           <form className="d-flex" role="search">
@@ -215,6 +221,7 @@ export default function HomePage() {
             &copy; 2025 DOT KICC. Tous droits réservés.
           </span>
         </div>
+        <Link href="/activites">Activités</Link>
       </footer>
     </div>
   );
