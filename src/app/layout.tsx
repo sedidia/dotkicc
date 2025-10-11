@@ -1,3 +1,7 @@
+// Dans app/layout.js ou un autre fichier de configuration global
+import 'bootstrap/dist/css/bootstrap.min.css'; 
+// Assurez-vous que cette ligne est présente et s'exécute !
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";

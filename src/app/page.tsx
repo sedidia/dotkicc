@@ -1,102 +1,86 @@
-import Image from "next/image";
+// app/page.js
 
-export default function Home() {
+'use client'; // 👈 CORRECTION CLÉ : Indique à Next.js qu'il s'agit d'un Client Component
+
+
+import Link from 'next/link';
+import Image from 'next/image'; // 👈 OPTIMISATION : Importation du composant Image de Next.js
+import { Carousel, CarouselItem, CarouselCaption } from 'react-bootstrap'; // 👈 Amélioration de l'importation
+
+export default function HomePage() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div>
+      {/* Menu (Composants clients par nature, mais inclus dans un composant parent client) */}
+      <nav className="navbar bg-body-tertiary">
+        <div className="container-fluid">
+          <a className="navbar-brand">DOT KICC</a>
+          <form className="d-flex" role="search">
+            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+            <button className="btn btn-outline-success" type="submit">Search</button>
+          </form>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+      </nav>
+
+      {/* Carrousel (Composant client de react-bootstrap) */}
+      <Carousel style={{ height: '80vh' }}>
+        <CarouselItem>
+          {/* Remplacé <img> par <Image> et ajouté des props requises (width, height, priority) */}
           <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+            className="d-block w-100"
+            src="/mission.jpg"
+            alt="Slide 1"
+            width={100}
+            height={100}
+            priority // Pour le premier carrousel, afin d'assurer un chargement rapide
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+          <CarouselCaption> 
+            <h3>Slide 1</h3>
+            <p>Ceci est le premier slide.</p>
+          </CarouselCaption>
+        </CarouselItem>
+        <CarouselItem>
           <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
+            className="d-block w-100"
+            src="/mission.jpg"
+            alt="Slide 2"
+            width={100}
+            height={100}
           />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+          <CarouselCaption>
+            <h3>Slide 2</h3>
+            <p>Ceci est le deuxième slide.</p>
+          </CarouselCaption>
+        </CarouselItem>
+        <CarouselItem>
           <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
+            className="d-block w-100"
+            src="/mission.jpg"
+            alt="Slide 3"
+            width={100}
+            height={100}
           />
-          Go to nextjs.org →
-        </a>
+          <CarouselCaption>
+            <h3>Slide 3</h3>
+            <p>Ceci est le troisième slide.</p>
+          </CarouselCaption>
+        </CarouselItem>
+      </Carousel>
+
+      {/* Corps de page */}
+      <div className="container mt-5">
+        <h1>Bienvenue sur mon site</h1>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.
+        </p>
+      </div>
+
+      {/* Pied de page */}
+      <footer className="footer mt-auto py-3 bg-light">
+        <div className="container">
+          <span className="text-muted">
+            &copy; 2023 Mon site. Tous droits réservés.
+          </span>
+        </div>
       </footer>
     </div>
   );
