@@ -22,53 +22,75 @@ export default function HomePage() {
       </nav>
 
       {/* Carrousel (Composant client de react-bootstrap) */}
-      <Carousel style={{ height: '80vh' }}>
+      <Carousel>
         <CarouselItem>
-          {/* Remplacé <img> par <Image> et ajouté des props requises (width, height, priority) */}
-          <Image
-            className="d-block w-100"
-            src="/mission.jpg"
-            alt="Slide 1"
-            width={100}
-            height={100}
-            priority // Pour le premier carrousel, afin d'assurer un chargement rapide
-          />
-          <CarouselCaption> 
-            <h3>Slide 1</h3>
-            <p>Ceci est le premier slide.</p>
-          </CarouselCaption>
+          <div className="container-fluid">
+            <div className="row">
+              <div className="col-12">
+                
+                <div className="card bg-info text-white text-center">
+                  
+                  <div className="card-body d-flex flex-column justify-content-center align-items-center">
+                    
+                    <h5 className="card-title">NOTRE ENTREPRISE</h5>
+                    <p className="card-text">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.
+                    </p>
+                    <a href="#" className="btn btn-primary">Action</a>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </CarouselItem>
         <CarouselItem>
-          <Image
-            className="d-block w-100"
-            src="/mission.jpg"
-            alt="Slide 2"
-            width={100}
-            height={100}
-          />
-          <CarouselCaption>
-            <h3>Slide 2</h3>
-            <p>Ceci est le deuxième slide.</p>
-          </CarouselCaption>
+          <div className="container-fluid">
+            <div className="row">
+              <div className="col-12">
+                
+                <div className="card bg-info text-white text-center">
+                  
+                  <div className="card-body d-flex flex-column justify-content-center align-items-center">
+                    
+                    <h5 className="card-title">NOTRE EQUIPE</h5>
+                    <p className="card-text">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.
+                    </p>
+                    <a href="#" className="btn btn-primary">Action</a>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </CarouselItem>
         <CarouselItem>
-          <Image
-            className="d-block w-100"
-            src="/mission.jpg"
-            alt="Slide 3"
-            width={100}
-            height={100}
-          />
-          <CarouselCaption>
-            <h3>Slide 3</h3>
-            <p>Ceci est le troisième slide.</p>
-          </CarouselCaption>
+          <div className="container-fluid">
+            <div className="row">
+              <div className="col-12">
+                
+                <div className="card bg-info text-white text-center">
+                  
+                  <div className="card-body d-flex flex-column justify-content-center align-items-center">
+                    
+                    <h5 className="card-title">NOTRE MISSION</h5>
+                    <p className="card-text">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.
+                    </p>
+                    <a href="#" className="btn btn-primary">Action</a>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </CarouselItem>
       </Carousel>
 
       {/* Corps de page */}
       <div className="container mt-5">
-        <h1>Bienvenue sur mon site</h1>
+        <h1>Bienvenue sur DOT KICC</h1>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.
         </p>
@@ -78,7 +100,7 @@ export default function HomePage() {
       <footer className="footer mt-auto py-3 bg-light">
         <div className="container">
           <span className="text-muted">
-            &copy; 2023 Mon site. Tous droits réservés.
+            &copy; 2025 DOT KICC. Tous droits réservés.
           </span>
         </div>
       </footer>
