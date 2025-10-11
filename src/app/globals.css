@@ -36,3 +36,6 @@ body {
 .card-body{
   min-height: 300px;
 }
+.thecard{
+  overflow: hidden;
+}

@@ -24,68 +24,126 @@ export default function HomePage() {
       {/* Carrousel (Composant client de react-bootstrap) */}
       <Carousel>
         <CarouselItem>
-          <div className="container-fluid">
-            <div className="row">
-              <div className="col-12">
-                
-                <div className="card bg-info text-white text-center">
-                  
-                  <div className="card-body d-flex flex-column justify-content-center align-items-center">
-                    
-                    <h5 className="card-title">NOTRE ENTREPRISE</h5>
-                    <p className="card-text">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.
-                    </p>
-                    <a href="#" className="btn btn-primary">Action</a>
-
-                  </div>
-                </div>
-              </div>
+          <div
+            style={{
+              position: 'relative',
+              width: '100vw',
+              height: '100vh',
+            }}
+            >
+            <img 
+              src="/activite.jpg"
+              alt="Image qui couvre le conteneur" 
+              style={{
+                width: '100vw',
+                height: '100vh',
+                objectFit: 'cover',
+              }}
+            />
+            <div
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                flexDirection: 'column',
+                color: 'white',
+                textAlign: 'center',
+              }}
+              
+            >
+              <h5>Card title</h5>
+              <p>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <p><small>Last updated 3 mins ago</small></p>
+              <a href="#" className="btn btn-primary">Action</a>
             </div>
           </div>
         </CarouselItem>
         <CarouselItem>
-          <div className="container-fluid">
-            <div className="row">
-              <div className="col-12">
-                
-                <div className="card bg-info text-white text-center">
-                  
-                  <div className="card-body d-flex flex-column justify-content-center align-items-center">
-                    
-                    <h5 className="card-title">NOTRE EQUIPE</h5>
-                    <p className="card-text">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.
-                    </p>
-                    <a href="#" className="btn btn-primary">Action</a>
-
-                  </div>
-                </div>
-              </div>
+          <div
+            style={{
+              position: 'relative',
+              width: '100vw',
+              height: '100vh',
+            }}
+            >
+            <img 
+              src="/equipe.jpg"
+              alt="Image qui couvre le conteneur" 
+              style={{
+                width: '100vw',
+                height: '100vh',
+                objectFit: 'cover',
+              }}
+            />
+            <div
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                flexDirection: 'column',
+                color: 'white',
+                textAlign: 'center',
+              }}
+              
+            >
+              <h5>Card title</h5>
+              <p>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <p><small>Last updated 3 mins ago</small></p>
+              <a href="#" className="btn btn-primary">Action</a>
             </div>
           </div>
         </CarouselItem>
         <CarouselItem>
-          <div className="container-fluid">
-            <div className="row">
-              <div className="col-12">
-                
-                <div className="card bg-info text-white text-center">
-                  
-                  <div className="card-body d-flex flex-column justify-content-center align-items-center">
-                    
-                    <h5 className="card-title">NOTRE MISSION</h5>
-                    <p className="card-text">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.
-                    </p>
-                    <a href="#" className="btn btn-primary">Action</a>
-
-                  </div>
-                </div>
-              </div>
+          <div
+            style={{
+              position: 'relative',
+              width: '100vw',
+              height: '100vh',
+            }}
+            >
+            <img 
+              src="/localisation.jpg"
+              alt="Image qui couvre le conteneur" 
+              style={{
+                width: '100vw',
+                height: '100vh',
+                objectFit: 'cover',
+              }}
+            />
+            <div
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                flexDirection: 'column',
+                color: 'white',
+                textAlign: 'center',
+              }}
+              
+            >
+              <h5>Card title</h5>
+              <p>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <p><small>Last updated 3 mins ago</small></p>
+              <a href="#" className="btn btn-primary">Action</a>
             </div>
           </div>
         </CarouselItem>
+        
       </Carousel>
 
       {/* Corps de page */}
@@ -104,6 +162,16 @@ export default function HomePage() {
             <div className="col-12 col-md-6 col-lg-4">
                 <div className="card h-100 shadow-sm border-primary">
                     <div className="card-body">
+                      <img 
+                        src="/activite.jpg" 
+                        alt="Image qui couvre le conteneur" 
+                        // fill // L'image remplit la taille du parent
+                        style={{
+                          objectFit: 'cover', // L'image couvre tout l'espace (coupe les bords si nécessaire)
+                        }}
+                        // Optionnel : La propriété sizes aide Next.js à savoir quelle taille d'image optimisée générer
+                        // sizes="max-width: 100%" 
+                      />
                         <h5 className="card-title text-primary">Dernière Activité</h5>
                         <p className="card-text text-muted">
                             <i className="bi bi-calendar-check me-2"></i> envoi de membres en mission.
