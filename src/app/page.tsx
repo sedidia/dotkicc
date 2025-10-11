@@ -96,6 +96,50 @@ export default function HomePage() {
         </p>
       </div>
 
+      <div className="container mt-5">
+        <h2 className="mb-4 text-center">Statistiques Clés</h2>
+        
+        <div className="row g-4">
+            
+            <div className="col-12 col-md-6 col-lg-4">
+                <div className="card h-100 shadow-sm border-primary">
+                    <div className="card-body">
+                        <h5 className="card-title text-primary">Dernière Activité</h5>
+                        <p className="card-text text-muted">
+                            <i className="bi bi-calendar-check me-2"></i> envoi de membres en mission.
+                        </p>
+                        <p className="card-text"><small className="text-success">Terminée le 10/10/2025</small></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div className="col-12 col-md-6 col-lg-4">
+                <div className="card h-100 shadow-sm border-warning">
+                    <div className="card-body">
+                        <h5 className="card-title text-warning">Prochaine Réunion</h5>
+                        <p className="card-text text-muted">
+                            <i className="bi bi-clock me-2"></i> Stratégie Marketing Q4.
+                        </p>
+                        <p className="card-text"><small className="text-danger">Prévue pour le 25/10/2025</small></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div className="col-12 col-md-12 col-lg-4">
+                <div className="card h-100 shadow-sm border-success">
+                    <div className="card-body text-center d-flex flex-column justify-content-center">
+                        <h5 className="card-title text-success">Chiffre d'Affaires (Octobre)</h5>
+                        <p className="card-text fs-1 fw-bold text-dark">
+                            $ 150 000
+                        </p>
+                        <p className="card-text"><small className="text-muted">Objectif atteint à 95%</small></p>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
       {/* Pied de page */}
       <footer className="footer mt-auto py-3 bg-light">
         <div className="container">
