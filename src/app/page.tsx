@@ -3,8 +3,8 @@
 'use client'; // 👈 CORRECTION CLÉ : Indique à Next.js qu'il s'agit d'un Client Component
 
 
-import Link from 'next/link';
-import Image from 'next/image'; // 👈 OPTIMISATION : Importation du composant Image de Next.js
+// import Link from 'next/link';
+// import Image from 'next/image'; // 👈 OPTIMISATION : Importation du composant Image de Next.js
 import { Carousel, CarouselItem, CarouselCaption } from 'react-bootstrap'; // 👈 Amélioration de l'importation
 
 export default function HomePage() {
@@ -128,7 +128,7 @@ export default function HomePage() {
             <div className="col-12 col-md-12 col-lg-4">
                 <div className="card h-100 shadow-sm border-success">
                     <div className="card-body text-center d-flex flex-column justify-content-center">
-                        <h5 className="card-title text-success">Chiffre d'Affaires (Octobre)</h5>
+                        <h5 className="card-title text-success">Chiffre d&apos;'Affaires (Octobre)</h5>
                         <p className="card-text fs-1 fw-bold text-dark">
                             $ 150 000
                         </p>
