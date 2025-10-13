@@ -221,6 +221,7 @@ export default function HomePage() {
             &copy; 2025 DOT KICC. Tous droits réservés.
           </span>
         </div>
+        <Link href="/activiteCreate">Activités</Link>
         <Link href="/activites">Activités</Link>
       </footer>
     </div>
