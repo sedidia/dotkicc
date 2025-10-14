@@ -24,7 +24,7 @@ function Activites() {
     <div>
       <h1>Collections</h1>
       <div>
-    <h1>Activités de l'entreprise</h1>
+    <h1>Activités de l entreprise</h1>
     <ul>
       {activites.map((activite, index) => (
         <li key={index}>

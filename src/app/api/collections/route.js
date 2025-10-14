@@ -1,6 +1,6 @@
 import { getCollections } from '../../../lib/mongodb';
 
-export async function GET(req) {
+export async function GET() {
   try {
     const collections = await getCollections();
     console.log('Collections dans la base de données:', collections);

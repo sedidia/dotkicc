@@ -4,8 +4,8 @@
 
 
 import Link from 'next/link';
-// import Image from 'next/image'; // 👈 OPTIMISATION : Importation du composant Image de Next.js
-import { Carousel, CarouselItem, CarouselCaption } from 'react-bootstrap'; // 👈 Amélioration de l'importation
+import Image from 'next/image'; // 👈 OPTIMISATION : Importation du composant Image de Next.js
+import { Carousel, CarouselItem } from 'react-bootstrap'; // 👈 Amélioration de l'importation
 
 export default function HomePage() {
   return (
@@ -37,7 +37,7 @@ export default function HomePage() {
               height: '100vh',
             }}
             >
-            <img 
+            <Image 
               src="/activite.jpg"
               alt="Image qui couvre le conteneur" 
               style={{
@@ -77,7 +77,7 @@ export default function HomePage() {
               height: '100vh',
             }}
             >
-            <img 
+            <Image 
               src="/equipe.jpg"
               alt="Image qui couvre le conteneur" 
               style={{
@@ -117,7 +117,7 @@ export default function HomePage() {
               height: '100vh',
             }}
             >
-            <img 
+            <Image 
               src="/localisation.jpg"
               alt="Image qui couvre le conteneur" 
               style={{
@@ -168,7 +168,7 @@ export default function HomePage() {
             <div className="col-12 col-md-6 col-lg-4">
                 <div className="card h-100 shadow-sm border-primary">
                     <div className="card-body">
-                      <img 
+                      <Image 
                         src="/activite.jpg" 
                         alt="Image qui couvre le conteneur" 
                         // fill // L'image remplit la taille du parent

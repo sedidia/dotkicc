@@ -72,7 +72,7 @@ export default function ActivityForm() {
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Champ Titre */}
         <div>
-          <label htmlFor="titre" className="block text-sm font-medium text-gray-700">Titre de l'Activité</label>
+          <label htmlFor="titre" className="block text-sm font-medium text-gray-700">Titre de l Activité</label>
           <input
             type="text"
             id="titre"
