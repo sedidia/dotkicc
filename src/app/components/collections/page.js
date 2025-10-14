@@ -10,9 +10,7 @@ function Activites() {
     const fetchActivites = async () => {
       try {
         const response = await fetch('/api/collections');
-        const datas = await response.json();
-        console.log(datas.collections.find(collection => collection.name === 'activites'));
-        
+        const datas = await response.json();        
         setActivites(datas.collections.find(collection => collection.name === 'activites').data); // Accédez à la propriété collections
       } catch (error) {
         console.error('Erreur lors de la récupération des collections:', error);
