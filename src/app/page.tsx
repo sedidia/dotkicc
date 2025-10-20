@@ -71,11 +71,11 @@ interface CollectionResponse {
  */
 async function getActivites(): Promise<Activite[]> {
   // En environnement de production, remplacez 'http://localhost:3000' par votre domaine réel.
-  const baseUrl = process.env.NODE_ENV === 'production' 
-        ? process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://dotkicc.vercel.app/' 
-        : 'http://localhost:3000/';
+  // const baseUrl = process.env.NODE_ENV === 'production' 
+  //       ? process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://dotkicc.vercel.app/' 
+  //       : 'http://localhost:3000/';
                   
-  const url = `${baseUrl}/api/collections`;
+  const url = `/api/collections`;
 
   try {
     const response = await fetch(url, { cache: 'no-store' }); 
