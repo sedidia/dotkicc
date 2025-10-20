@@ -8,7 +8,7 @@ function Activites() {
   const [activites, setActivites] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const handleNavigate = (e) => {
+  const handleNavigate = () => {
     setIsLoading(true);
   }
 
@@ -34,9 +34,12 @@ function Activites() {
     <div>
       <div  className="py-20 bg-white">
         <div  className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1>Collections</h1>
+          <h1>
+            <Link className=" text-indigo-600 font-medium flex items-center hover:text-indigo-800 transition duration-150" href={`/`}>
+                  {`< Retour`}
+                </Link>
+             Collections</h1>
           <div>
-            <h1>Activités de l entreprise</h1>
             {isLoading ?
             <Loader></Loader>
             :

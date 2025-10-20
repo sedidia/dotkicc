@@ -1,6 +1,7 @@
 // src/app/collections/[_id]/page.js
 import { getCollections } from '../../../lib/mongodb'; // Ajustez le chemin si nécessaire
 import Link from 'next/link';
+import Image from 'next/image';
 
 /**
  * Fonction utilitaire pour récupérer TOUTES les collections et trouver l'activité spécifique.
@@ -117,9 +118,11 @@ export default async function ActiviteDetailsPage({ params }) {
             <div className="w-full h-48 bg-gray-200 overflow-hidden">
                             {/* Si l'image existe, on l'affiche */}
                             {activite.laphoto ? (
-                              <img 
+                              <Image 
                                   src={activite.laphoto} 
                                   alt={activite.titre} 
+                                  width={100}
+                                  height={70}
                                   className="w-full h-full object-cover transition duration-300 hover:scale-105"
                               />
                             ) : (

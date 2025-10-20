@@ -10,7 +10,8 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '/', // 👈 Ajoutez le domaine ici (ex: via.placeholder.com)
+        hostname: 'placehold.co', // 👈 Ajoutez le domaine ici (ex: via.placeholder.com)
+        // hostname: '/**', // 👈 Ajoutez le domaine ici (ex: via.placeholder.com)
         port: '',
         pathname: '/**', // Autorise n'importe quel chemin sur ce domaine
       },

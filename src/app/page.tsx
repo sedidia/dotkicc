@@ -1,19 +1,18 @@
 import Link from 'next/link';
 import { Metadata } from 'next';
 import Footer from './components/footer';
-// Loader non utilisé ici car le rendu est synchrone (Serveur), 
-// mais on le garde si la logique évolue.
-import Loader from './components/loader';
+
 import { 
-  Menu, X, ArrowRight, TrendingUp, Users, Target, Briefcase, 
+  X, ArrowRight, TrendingUp, Users, Briefcase, 
   Camera, Zap, ChevronRight // Ajouté pour la section Galerie
 } from 'lucide-react';
+import Image from 'next/image';
 
 
 
 // objects
 const mockStats = [
-  { value: "5.2M", label: "Chiffre d'Affaires (€)", icon: TrendingUp, color: "text-indigo-600" },
+  { value: "5.2M", label: "Chiffre d Affaires (€)", icon: TrendingUp, color: "text-indigo-600" },
   { value: "450+", label: "Membres Actifs", icon: Users, color: "text-green-600" },
   { value: "120", label: "Projets Réalisés", icon: Briefcase, color: "text-yellow-600" },
 ];
@@ -42,13 +41,28 @@ export const metadata: Metadata = {
 // 2. Fonctions de Récupération des Données (Serveur)
 // **********************************************
 
+// 1. Définir le type des données contenues dans le tableau 'data'
 interface Activite {
-    _id: string;
+    _id: string; // MongoDB IDs sont souvent des strings
     titre: string;
     ladate: string;
     description: string;
     laphoto: string;
-    // Ajoutez d'autres champs au besoin
+    // ... Ajoutez tous les autres champs ici
+}
+
+// 2. Définir la structure d'un élément de la collection
+interface CollectionItem {
+    name: string;
+    data: Activite[]; // Le tableau de données utilise l'interface Activite
+    // Si d'autres collections existent, vous pouvez utiliser 'any[]' pour leur 'data'
+    // mais le mieux est d'utiliser un 'Union Type' ou un 'Generic' si possible.
+    // Pour simplifier, nous utilisons ici un type qui couvre au moins 'activites'.
+}
+
+// 3. Définir la structure complète des données reçues
+interface CollectionResponse {
+    collections: CollectionItem[];
 }
 
 /**
@@ -58,8 +72,8 @@ interface Activite {
 async function getActivites(): Promise<Activite[]> {
   // En environnement de production, remplacez 'http://localhost:3000' par votre domaine réel.
   const baseUrl = process.env.NODE_ENV === 'production' 
-        ? process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'VOTRE_URL_PROD_ICI' 
-        : 'https://dotkicc.vercel.app/';
+        ? process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://dotkicc.vercel.app/' 
+        : 'http://localhost:3000/';
                   
   const url = `${baseUrl}/api/collections`;
 
@@ -71,11 +85,12 @@ async function getActivites(): Promise<Activite[]> {
         return [];
     }
 
-    const datas = await response.json();
+    // const datas = await response.json();
+    const datas: CollectionResponse = await response.json();
 
     // Logique de récupération sécurisée et robuste (avec chaînage optionnel)
     const activites = datas?.collections
-        .find((collection: any) => collection.name === 'activites')
+        .find((collection) => collection.name === 'activites')
         ?.data || [];
         
     return activites as Activite[];
@@ -103,59 +118,14 @@ export default async function Home() {
       { name: "Direction", href: "#ceo" },
     ];
 
-
     const mockCEO = {
       nom: "CEO Idris sedidia",
       titre: "Directeur Général",
       citation: "Notre vision est de transformer l'ambition en impact réel, en plaçant l'humain au cœur de chaque innovation.",
-      imagePlaceholder: "https://placehold.co/150x150/5B21B6/ffffff?text=/@"
+      imagePlaceholder: "https://placehold.co/150x150/5B21B6/ffffff?text=E.V."
     };
     
     // --- GALERIE DE PHOTOS (Utilisation des données fournies) ---
-    const mockPhotos = [
-      { 
-        id: 1, 
-        category: 'Missions', 
-        title: 'Lancement du Projet Alpha', 
-        type: 'Déploiement',
-        url: 'https://placehold.co/600x400/312E81/ffffff?text=MISSION+ALPHA', 
-      },
-      { 
-        id: 2, 
-        category: 'Événements', 
-        title: 'Gala Annuel 2024', 
-        type: 'Célébration',
-        url: 'https://placehold.co/600x400/991B1F/ffffff?text=GALA+ANNUEL', 
-      },
-      { 
-        id: 3, 
-        category: 'Missions', 
-        title: 'Atelier de Cadrage', 
-        type: 'Brainstorming',
-        url: 'https://placehold.co/600x400/1D4ED8/ffffff?text=ATELIER+CADRAGE', 
-      },
-      { 
-        id: 4, 
-        category: 'Autres', 
-        title: 'Nouveaux Bureaux', 
-        type: 'Environnement',
-        url: 'https://placehold.co/600x400/059669/ffffff?text=NOUVEAUX+BUREAUX', 
-      },
-      { 
-        id: 5, 
-        category: 'Événements', 
-        title: 'Hackathon 48h', 
-        type: 'Innovation',
-        url: 'https://placehold.co/600x400/5B21B6/ffffff?text=HACKATHON', 
-      },
-      { 
-        id: 6, 
-        category: 'Missions', 
-        title: 'Phase de Test Bêta', 
-        type: 'Validation',
-        url: 'https://placehold.co/600x400/D97706/ffffff?text=TEST+B%C3%89TA', 
-      },
-    ];
     
     const categories = [
       { id: 'Tous', label: 'Toutes les Catégories', icon: Camera, colorClass: 'bg-indigo-600' },
@@ -180,13 +150,13 @@ export default async function Home() {
                       {/* Desktop Menu */}
                       <div className="hidden md:flex space-x-8">
                         {navItems.map((item) => (
-                          <a 
+                          <Link 
                             key={item.name} 
                             href={item.href} 
                             className="text-gray-600 hover:text-indigo-600 font-medium transition duration-150"
                           >
                             {item.name}
-                          </a>
+                          </Link>
                         ))}
                       </div>
                       {/* Mobile Menu Button */}
@@ -203,13 +173,13 @@ export default async function Home() {
                   {/* Mobile Menu (Responsive) */}
                   <div className="md:hidden bg-white border-t border-gray-100">
                     {navItems.map((item) => (
-                      <a 
+                      <Link 
                         key={item.name} 
                         href={item.href}
                         className="block px-4 py-2 text-base font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition duration-150"
                       >
                         {item.name}
-                      </a>
+                      </Link>
                     ))}
                   </div>
             </nav>
@@ -227,18 +197,18 @@ export default async function Home() {
                 
                 <div className="relative z-10 text-center p-8 max-w-3xl">
                   <h2 className="text-5xl md:text-6xl font-extrabold text-white leading-tight mb-4 drop-shadow-lg">
-                    Façonner l'Avenir, Ensemble.
+                    Façonner l Avenir, Ensemble.
                   </h2>
                   <p className="text-xl text-indigo-100 mb-8 drop-shadow-md">
                     Votre partenaire de confiance pour l'innovation et la croissance durable.
                   </p>
-                  <a 
+                  <Link 
                     href="/collections" 
                     className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-lg text-indigo-700 bg-white hover:bg-indigo-50 transition duration-300 transform hover:scale-105"
                   >
                     Découvrez nos Activités
                     <ArrowRight className="ml-2 h-5 w-5" />
-                  </a>
+                  </Link>
                 </div>
               </section>
               {/* 2. Carousel Home (Hero Section) */}
@@ -280,16 +250,24 @@ export default async function Home() {
                           <div className="w-full h-48 bg-gray-200 overflow-hidden">
                             {/* Si l'image existe, on l'affiche */}
                             {activite.laphoto ? (
-                              <img 
-                                  src={activite.laphoto} 
-                                  alt={activite.titre} 
-                                  className="w-full h-full object-cover transition duration-300 hover:scale-105"
+                              <Image // <-- Utilisation du composant Next.js Image
+                                src={activite.laphoto} 
+                                alt={activite.titre} 
+                                width={100}
+                                height={70}
+                                // unoptimized
+                                style={{ objectFit: 'cover' }}
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                className="w-full h-full object-cover transition duration-300 hover:scale-105"
                               />
-                            ) : (
+
+                              ) : (
                               <div className="w-full h-full flex items-center justify-center text-gray-400">
-                                  [Image de la collection]
+                                [Image de la collection]
                               </div>
                             )}
+
+
                           </div>
 
                           <div className="p-6">
@@ -303,12 +281,12 @@ export default async function Home() {
                                           {activite.description}
                                       </p>
 
-                                      <Link 
+                                      {/* <Link 
                                           className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-yellow-500 hover:bg-yellow-600 transition duration-150" 
-                                          href={`/collections/${activite._id}`}
+                                          href={`/collections`}
                                       >
                                           Voir les détails →
-                                      </Link>
+                                      </Link> */}
                           </div>
                         </div>
                       ))}
@@ -348,7 +326,7 @@ export default async function Home() {
                       const isActive = index === 0; 
 
                       return (
-                        <a
+                        <Link
                           key={cat.id}
                           href="#"
                           className={`
@@ -362,18 +340,11 @@ export default async function Home() {
                         >
                           <Icon className="w-5 h-5 mr-2" />
                           {cat.label}
-                        </a>
+                        </Link>
                       );
                     })}
                   </div>
 
-                  {/* Grille des Photos Statiques */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {/* Utilisation de mockPhotos pour le rendu statique */}
-                    {/* {mockPhotos.map((photo) => (
-                      <StaticPhotoCard key={photo.id} photo={photo} />
-                    ))} */}
-                  </div>
 
                   {/* 6. Ce que nous faisons (Mission) */}
         <section id="mission" className="py-20 bg-indigo-50">
@@ -385,12 +356,12 @@ export default async function Home() {
               Nous nous engageons à fournir des solutions innovantes et éthiques qui propulsent la croissance de nos clients. Notre objectif est de bâtir un écosystème où la technologie et la responsabilité sociale se rencontrent pour un impact positif et durable sur la société.
             </p>
             <div className="mt-10">
-              <a 
+              <Link 
                 href="#" 
                 className="text-indigo-600 font-semibold hover:text-indigo-800 transition duration-300"
               >
                 Lire notre charte complète →
-              </a>
+              </Link>
             </div>
           </div>
         </section>
@@ -403,15 +374,18 @@ export default async function Home() {
             </h2>
             <div className="flex flex-col md:flex-row items-center md:text-left">
               <div className="flex-shrink-0 mb-6 md:mb-0 md:mr-8">
-                <img 
+                <Image 
                   src={mockCEO.imagePlaceholder} 
                   alt={`Photo de ${mockCEO.nom}`}
+                  width={100}
+                  height={70}
+                  unoptimized
                   className="w-40 h-40 rounded-full object-cover border-4 border-indigo-500 mx-auto md:mx-0"
                 />
               </div>
               <div>
                 <blockquote className="text-2xl italic font-light mb-4">
-                  “{mockCEO.citation}”
+                  {mockCEO.citation}
                 </blockquote>
                 <p className="text-xl font-semibold text-indigo-400">
                   {mockCEO.nom}
