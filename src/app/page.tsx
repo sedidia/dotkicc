@@ -200,7 +200,7 @@ export default async function Home() {
                     Façonner l Avenir, Ensemble.
                   </h2>
                   <p className="text-xl text-indigo-100 mb-8 drop-shadow-md">
-                    Votre partenaire de confiance pour l'innovation et la croissance durable.
+                    Votre partenaire de confiance pour l innovation et la croissance durable.
                   </p>
                   <Link 
                     href="/collections" 
