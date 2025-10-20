@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   keywords: ['activités', 'entreprise', 'formation', 'événements', 'blog', 'actualités'],
   openGraph: {
     title: "DOT KICC - Accueil",
-    description: "La page d'accueil incontournable pour les activités de notre entreprise.",
+    description: "La page d accueil incontournable pour les activités de notre entreprise.",
     url: '/',
     siteName: 'DOT KICC',
     // Ajoutez ici une image si vous en avez une dans /public
@@ -51,12 +51,12 @@ interface Activite {
     // ... Ajoutez tous les autres champs ici
 }
 
-// 2. Définir la structure d'un élément de la collection
+// 2. Définir la structure d un élément de la collection
 interface CollectionItem {
     name: string;
-    data: Activite[]; // Le tableau de données utilise l'interface Activite
-    // Si d'autres collections existent, vous pouvez utiliser 'any[]' pour leur 'data'
-    // mais le mieux est d'utiliser un 'Union Type' ou un 'Generic' si possible.
+    data: Activite[]; // Le tableau de données utilise l interface Activite
+    // Si d autres collections existent, vous pouvez utiliser 'any[]' pour leur 'data'
+    // mais le mieux est d utiliser un 'Union Type' ou un 'Generic' si possible.
     // Pour simplifier, nous utilisons ici un type qui couvre au moins 'activites'.
 }
 
@@ -97,12 +97,12 @@ async function getActivites(): Promise<Activite[]> {
 
   } catch (error) {
     console.error('Erreur lors de la récupération des activités (Serveur):', error);
-    return []; // Retourne un tableau vide en cas d'échec
+    return []; // Retourne un tableau vide en cas d échec
   }
 }
 
 // **********************************************
-// 3. Composant de la Page d'Accueil (Serveur)
+// 3. Composant de la Page d Accueil (Serveur)
 // **********************************************
 
 export default async function Home() {
@@ -121,7 +121,7 @@ export default async function Home() {
     const mockCEO = {
       nom: "CEO Idris sedidia",
       titre: "Directeur Général",
-      citation: "Notre vision est de transformer l'ambition en impact réel, en plaçant l'humain au cœur de chaque innovation.",
+      citation: "Notre vision est de transformer l ambition en impact réel, en plaçant l humain au cœur de chaque innovation.",
       imagePlaceholder: "https://placehold.co/150x150/5B21B6/ffffff?text=E.V."
     };
     
@@ -131,7 +131,7 @@ export default async function Home() {
       { id: 'Tous', label: 'Toutes les Catégories', icon: Camera, colorClass: 'bg-indigo-600' },
       { id: 'Missions', label: 'Missions Client', icon: Briefcase, colorClass: 'bg-green-600' },
       { id: 'Événements', label: 'Événements et Réseautage', icon: Zap, colorClass: 'bg-red-600' },
-      { id: 'Autres', label: 'Vie d\'Entreprise', icon: ChevronRight, colorClass: 'bg-yellow-600' },
+      { id: 'Autres', label: 'Vie d Entreprise', icon: ChevronRight, colorClass: 'bg-yellow-600' },
     ];
     
 
@@ -213,7 +213,7 @@ export default async function Home() {
               </section>
               {/* 2. Carousel Home (Hero Section) */}
 
-              {/* 3. Chiffre d'affaires & Membres (Statistiques) */}
+              {/* 3. Chiffre d affaires & Membres (Statistiques) */}
               <section className="py-16 bg-white">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                   <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
@@ -234,7 +234,7 @@ export default async function Home() {
                   </div>
                 </div>
               </section>
-              {/* 3. Chiffre d'affaires & Membres (Statistiques) */}
+              {/* 3. Chiffre d affaires & Membres (Statistiques) */}
 
               {/* activités recentes */}
               <section id="activities" className="py-20 bg-gray-50">
@@ -248,7 +248,7 @@ export default async function Home() {
                       {activites.map((activite) => (
                         <div key={activite._id} className="bg-white p-6 rounded-xl shadow-lg border-t-8 border-yellow-500 flex flex-col hover:shadow-2xl transition duration-300">
                           <div className="w-full h-48 bg-gray-200 overflow-hidden">
-                            {/* Si l'image existe, on l'affiche */}
+                            {/* Si l image existe, on l affiche */}
                             {activite.laphoto ? (
                               <Image // <-- Utilisation du composant Next.js Image
                                 src={activite.laphoto} 
@@ -294,7 +294,7 @@ export default async function Home() {
                   ) : (
                     <div className="text-center py-10 border-2 border-dashed border-gray-300 rounded-lg">
                       <p className="text-lg text-gray-600">
-                        {/* Message affiché si la collection est vide ou en cas d'erreur */}
+                        {/* Message affiché si la collection est vide ou en cas d erreur */}
                         Aucune activité n'a été trouvée ou une erreur est survenue lors du chargement.
                       </p>
                       <p className="text-sm text-gray-400 mt-2">
@@ -315,14 +315,14 @@ export default async function Home() {
                     Galerie : Moments Forts en Images
                   </h2>
                   <p className="text-xl text-gray-600 text-center mb-12 max-w-3xl mx-auto">
-                    Revivez nos projets, événements et la vie d'équipe.
+                    Revivez nos projets, événements et la vie d équipe.
                   </p>
 
                   {/* Boutons de Catégorie (Statiques/Décoratifs) */}
                   <div className="flex flex-wrap justify-center space-x-2 space-y-2 md:space-y-0 mb-12">
                     {categories.map((cat, index) => {
                       const Icon = cat.icon;
-                      // Le premier bouton est stylisé comme "actif" pour l'apparence statique
+                      // Le premier bouton est stylisé comme "actif" pour l apparence statique
                       const isActive = index === 0; 
 
                       return (
