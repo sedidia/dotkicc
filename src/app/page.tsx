@@ -71,11 +71,11 @@ interface CollectionResponse {
  */
 async function getActivites(): Promise<Activite[]> {
   // En environnement de production, remplacez 'http://localhost:3000' par votre domaine réel.
-  // const baseUrl = process.env.NODE_ENV === 'production' 
-  //       ? process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://dotkicc.vercel.app/' 
-  //       : 'http://localhost:3000/';
+  const baseUrl = process.env.NODE_ENV === 'production' 
+        ? process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://dotkicc.vercel.app/' 
+        : 'http://localhost:3000/';
                   
-  const url = `/api/collections`;
+  const url = `${baseUrl}/api/collections`;
 
   try {
     const response = await fetch(url, { cache: 'no-store' }); 
@@ -271,22 +271,22 @@ export default async function Home() {
                           </div>
 
                           <div className="p-6">
-                                      <p className="text-sm font-medium text-indigo-500 mb-1">
-                                          {new Date(activite.ladate).toLocaleDateString('fr-FR')}
-                                      </p>
-                                      <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2">
-                                          {activite.titre}
-                                      </h3>
-                                      <p className="text-gray-600 mb-4 line-clamp-3">
+                            <p className="text-sm font-medium text-indigo-500 mb-1">
+                                {new Date(activite.ladate).toLocaleDateString('fr-FR')}
+                            </p>
+                            <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2">
+                                {activite.titre}
+                            </h3>
+                            <p className="text-gray-600 mb-4 line-clamp-3">
                                           {activite.description}
-                                      </p>
+                            </p>
 
-                                      {/* <Link 
-                                          className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-yellow-500 hover:bg-yellow-600 transition duration-150" 
-                                          href={`/collections`}
-                                      >
-                                          Voir les détails →
-                                      </Link> */}
+                            <Link 
+                                className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-yellow-500 hover:bg-yellow-600 transition duration-150" 
+                                href={`/collections/${activite._id}`}
+                            >
+                                Voir les détails →
+                            </Link>
                           </div>
                         </div>
                       ))}
