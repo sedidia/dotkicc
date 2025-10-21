@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react';
 import axios from 'axios';
+// import { ArrowLeft } from 'lucide-react';
+import Link from 'next/link';
 
 export default function UploadPage() {
   const [file, setFile] = useState(null);
@@ -52,14 +54,55 @@ export default function UploadPage() {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '10px', maxWidth: '400px', margin: 'auto' }}>
-      <h1>Uploader Photo et Données</h1>
-      <input type="text" placeholder="Titre" value={title} onChange={(e) => setTitle(e.target.value)} required />
-      <input type="date" value={date} onChange={(e) => setDate(e.target.value)} required />
-      <input type="file" accept="image/*" onChange={handleFileChange} required />
-      <textarea placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} required />
-      <button type="submit">Envoyer</button>
-      <p style={{ marginTop: '10px' }}>{message}</p>
-    </form>
+    <div className="max-w-md mx-auto p-4 mt-10">
+      <nav className="flex items-center mb-6">
+        <Link 
+          href="#" 
+          className="text-gray-600 hover:text-indigo-600 font-medium transition duration-150 mr-4"
+          onClick={() => window.history.back()}
+        >
+          <ArrowLeft className="h-6 w-6" />
+        </Link>
+        <h1 className="text-2xl font-bold text-gray-900">Uploader Photo et Données</h1>
+      </nav>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <input 
+          type="text" 
+          placeholder="Titre" 
+          value={title} 
+          onChange={(e) => setTitle(e.target.value)} 
+          required 
+          className="block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        />
+        <input 
+          type="date" 
+          value={date} 
+          onChange={(e) => setDate(e.target.value)} 
+          required 
+          className="block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        />
+        <input 
+          type="file" 
+          accept="image/*" 
+          onChange={handleFileChange} 
+          required 
+          className="block w-full text-gray-500 file:mr-4 file:py-2 file:px-4 file:border file:border-gray-300 file:rounded-md file:text-sm file:font-medium file:bg-gray-100 hover:file:bg-gray-200"
+        />
+        <textarea 
+          placeholder="Description" 
+          value={description} 
+          onChange={(e) => setDescription(e.target.value)} 
+          required 
+          className="block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 h-32 resize-none"
+        />
+        <button 
+          type="submit" 
+          className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition duration-150"
+        >
+          Envoyer
+        </button>
+        <p className="mt-4 text-gray-600">{message}</p>
+      </form>
+    </div>
   );
 }

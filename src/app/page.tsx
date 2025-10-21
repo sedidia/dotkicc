@@ -295,10 +295,10 @@ export default async function Home() {
                     <div className="text-center py-10 border-2 border-dashed border-gray-300 rounded-lg">
                       <p className="text-lg text-gray-600">
                         {/* Message affiché si la collection est vide ou en cas d erreur */}
-                        Aucune activité n'a été trouvée ou une erreur est survenue lors du chargement.
+                        Aucune activité n a été trouvée ou une erreur est survenue lors du chargement.
                       </p>
                       <p className="text-sm text-gray-400 mt-2">
-                                    Veuillez vérifier la connexion à la base de données ou le Route Handler `/api/collections`.
+                        Veuillez vérifier la connexion à la base de données ou le Route Handler `/api/collections`.
                       </p>
                     </div>
                   )}
