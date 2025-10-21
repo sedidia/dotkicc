@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import axios from 'axios';
-// import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 
 export default function UploadPage() {
@@ -61,7 +60,7 @@ export default function UploadPage() {
           className="text-gray-600 hover:text-indigo-600 font-medium transition duration-150 mr-4"
           onClick={() => window.history.back()}
         >
-          <ArrowLeft className="h-6 w-6" />
+          Retour
         </Link>
         <h1 className="text-2xl font-bold text-gray-900">Uploader Photo et Données</h1>
       </nav>
