@@ -3,6 +3,7 @@ import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 import Loader from '../components/loader';
 import Footer from '../components/footer';
+import ResponsiveNavbar from '../components/ResponsiveNavbar';
 
 function Activites() {
   const [activites, setActivites] = useState([]);
@@ -32,14 +33,11 @@ function Activites() {
 
   return (
     <div>
-      <div  className="py-20 bg-white">
-        <div  className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1>
-            <Link className=" text-indigo-600 font-medium flex items-center hover:text-indigo-800 transition duration-150" href={`/`}>
-                  {`< Retour`}
-                </Link>
-             Collections</h1>
-          <div>
+      <div  className="py-20 bg-white pt-2">
+        <div  className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-2">
+          <ResponsiveNavbar />
+          
+          <div className='mt-4'>
             {isLoading ?
             <Loader></Loader>
             :

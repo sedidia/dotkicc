@@ -95,12 +95,28 @@ export default async function ActiviteDetailsPage({ params }) {
 
     // Affichage des détails de l'activité
     return (
-        <div className="p-5 max-w-4xl mx-auto md:p-10">
+        <div className="max-w-md mx-auto p-4 mt-0 ">
             {/* Titre Principal */}
+            <nav className="sticky top-0 z-50 bg-white shadow-md mb-6">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="flex justify-between items-center h-16">
+                    <Link key="+" href="/" className="text-gray-600 hover:text-indigo-700 font-semibold transition duration-200 py-2 px-3 no-underline">
+                    <div className="flex items-center">
+                        <span className="text-2xl font-bold text-indigo-600">
+                        DOT KICC
+                        </span>
+                    </div>
+                    </Link>
+                    {/* Desktop Menu */}
+                    <div className="md:flex space-x-8">
+                        <Link key="+" href="/collections" className="text-gray-600 hover:text-indigo-600 font-medium transition duration-150">
+                        Activités
+                        </Link>
+                    </div>
+                    </div>
+                </div>
+            </nav>
             
-            <Link className="mt-4 text-indigo-600 font-medium flex items-center hover:text-indigo-800 transition duration-150" href={`/collections/`}>
-                  Activites
-            </Link>
 
             <div className="w-full h-48 bg-gray-200 overflow-hidden">
                 {/* Si l'image existe, on l'affiche */}
@@ -118,7 +134,10 @@ export default async function ActiviteDetailsPage({ params }) {
                   </div>
                 )}
             </div>
-                          
+
+            <p className="text-sm font-medium text-indigo-500 mb-1 mt-4">
+                {new Date(activite.ladate).toLocaleDateString('fr-FR')}
+            </p>         
             <h1 className="text-4xl font-extrabold text-gray-900 mb-4 border-b pb-2">
                 {activite.titre || activite.name}
             </h1>
