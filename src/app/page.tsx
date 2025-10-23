@@ -4,7 +4,7 @@ import Footer from './components/footer';
 
 
 import { 
-  X, ArrowRight, TrendingUp, Users, Briefcase, 
+  ArrowRight, TrendingUp, Users, Briefcase, 
   Camera, Zap, ChevronRight // Ajouté pour la section Galerie
 } from 'lucide-react';
 import Image from 'next/image';
@@ -395,7 +395,7 @@ export default async function Home() {
                         Aucune activité n a été trouvée.
                       </p>
                       <p className="text-sm text-gray-400 mt-2">
-                        Les nouvelles activités s'afficheront ici.
+                        Les nouvelles activités seront affichées ici.
                       </p>
                     </div>
                   )}

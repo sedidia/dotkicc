@@ -63,7 +63,6 @@ const SuccessToast = ({ message, onClose }) => {
 
 export default function UploadPage({message, onClose}) {
   const [successMessage, setSuccessMessage] = useState(null);
-  const [verificationResult, setVerificationResult] = useState(null);
 
   const [adminConnected, setAdminConnected] = useState(false);
   const [userFound, setUserFound] = useState(false);
@@ -123,8 +122,7 @@ export default function UploadPage({message, onClose}) {
       // et la Boundary pour les requêtes avec FormData.
       const response = await axios.post('/api/activityCreate', formData);
 
-      // setSuccessMessage(`Succès! Réponse: ${response.data.successMessage}`);
-      // console.log('Réponse de l\'API:', response.data);
+      console.log(response);
 
       setFile(null);
       setTitle('');
@@ -132,11 +130,7 @@ export default function UploadPage({message, onClose}) {
       setDescription('');
 
       // TOAST
-      setTimeout(() => {    
-        // setVerificationResult({
-        //     success: true,
-        //     message: `Activité enregistrée avec sussès !`,
-        // });
+      setTimeout(() => {
                               
         // --- Déclenche le Toast de Succès au lieu de l'affichage permanent ---
         setSuccessMessage(`Activité enregistrée avec sussès !`);
@@ -144,12 +138,6 @@ export default function UploadPage({message, onClose}) {
       // TOAST
       
     } catch (error) {
-      // Échec : Aucun utilisateur correspondant
-      // setVerificationResult({
-      //   success: false,
-      //   message: "Utilisateur non enregistré ou mot de passe incorrect.",
-      // });
-
       console.error('Erreur d\'envoi:', error.response ? error.response.data : error.successMessage);
       setSuccessMessage(`Échec de l'envoi: 'Erreur réseau.'}`);
     }
@@ -222,7 +210,7 @@ export default function UploadPage({message, onClose}) {
           {/* Champ titre activité */}
           <div className="sm:col-span-4 mb-4">
             <label htmlFor="titre" className="block text-sm font-medium text-gray-700 mb-1">
-              Titre de l&apos;activité
+              Titre activité
             </label>
             <div className="relative">
               <input
@@ -240,7 +228,7 @@ export default function UploadPage({message, onClose}) {
           {/* Champ date activité */}
           <div className="sm:col-span-4 mb-4">
             <label htmlFor="ladate" className="block text-sm font-medium text-gray-700 mb-1">
-              Date de l&apos;activité
+              Date activité
             </label>
             <div className="relative">
               <input 
@@ -269,7 +257,7 @@ export default function UploadPage({message, onClose}) {
             className="block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 h-32 resize-none"
           />
           <button type="submit" className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition duration-150">
-            Créer l&apos;activité
+            Créer activité
           </button>
           <p className="mt-4 text-gray-600">{successMessage}</p>
         </form>
@@ -292,7 +280,7 @@ export default function UploadPage({message, onClose}) {
         {/* Champ Username */}
         <div className="sm:col-span-4 mb-4">
           <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-1">
-            Nom d&apos;utilisateur
+            Nom utilisateur
           </label>
           <div className="relative">
             <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
