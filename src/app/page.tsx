@@ -1,4 +1,4 @@
-import Link from 'next/link';
+// import Link from 'next/link';
 import { Metadata } from 'next';
 import Footer from './components/footer';
 
@@ -65,6 +65,52 @@ interface CollectionResponse {
     collections: CollectionItem[];
 }
 
+
+
+
+
+
+
+
+// --- DÉFINITION DES TYPES ---
+
+/**
+ * Interface pour les props des icônes SVG.
+ * Inclut l'attribut 'className' commun pour les styles Tailwind.
+ */
+interface IconProps {
+    className?: string;
+}
+
+/**
+ * Interface pour les props du composant Link (simulé).
+ */
+interface LinkProps {
+    href: string;
+    className: string;
+    children: React.ReactNode;
+}
+
+// --- DÉFINITION DES COMPOSANTS ---
+
+// L'erreur est résolue ici en typant explicitement 'props' avec 'IconProps'
+const MenuIcon = (props: IconProps) => (
+    <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+);
+
+// L'erreur est résolue ici en typant explicitement 'props' avec 'IconProps'
+const XIcon = (props: IconProps) => (
+    <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+);
+
+// Composant Link simulé, typé avec 'LinkProps'
+const Link = ({ href, className, children }: LinkProps) => <a href={href} className={className}>{children}</a>;
+
+
+
+
+
+
 /**
  * Récupère le tableau des activités à partir du Route Handler /api/collections.
  * Cette fonction est exécutée côté Serveur.
@@ -116,35 +162,7 @@ export default async function Home() {
       { name: "Direction", href: "#ceo" },
     ];
     // LA NAV
-    /**
-     * Définit les propriétés attendues par les composants d'icônes SVG.
-     * Utilise les attributs SVG/HTML courants (comme className).
-     * @typedef {object} IconProps
-     * @property {string} [className] - Classes Tailwind CSS à appliquer.
-     */
 
-    // Icônes Lucide-React (supposées disponibles ou à remplacer par des SVGs inline)
-    /** @param {IconProps} props */
-    const MenuIcon = (props) => (
-        <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-    );
-
-    /** @param {IconProps} props */
-    const XIcon = (props) => (
-        <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-    );
-
-    /**
-     * Définit les propriétés pour le composant Link.
-     * @typedef {object} LinkProps
-     * @property {string} href - L'URL de destination.
-     * @property {string} className - Classes Tailwind CSS à appliquer.
-     * @property {React.ReactNode} children - Le contenu du lien.
-     */
-
-    // Composant Link simulé pour Next.js (remplacez par l'importation réelle si nécessaire)
-    /** @param {LinkProps} props */
-    const Link = ({ href, className, children }) => <a href={href} className={className}>{children}</a>;
 
     // LA NAV
 
@@ -374,10 +392,10 @@ export default async function Home() {
                     <div className="text-center py-10 border-2 border-dashed border-gray-300 rounded-lg">
                       <p className="text-lg text-gray-600">
                         {/* Message affiché si la collection est vide ou en cas d erreur */}
-                        Aucune activité n a été trouvée ou une erreur est survenue lors du chargement.
+                        Aucune activité n a été trouvée.
                       </p>
                       <p className="text-sm text-gray-400 mt-2">
-                        Veuillez vérifier la connexion à la base de données ou le Route Handler `/api/collections`.
+                        Les nouvelles activités s'afficheront ici.
                       </p>
                     </div>
                   )}
