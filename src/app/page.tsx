@@ -1,10 +1,13 @@
 "use client";
+import Link from 'next/link';
 
 import React, { useState, useEffect } from 'react';
 import { 
   Users, HardHat, HeartHandshake, ShieldCheck, ArrowRight, 
-  Mail, Phone, MapPin, Facebook, Linkedin, Loader2, Shield 
+  Mail, Phone, MapPin, Facebook, Linkedin, Twitter, Loader2, Shield 
 } from 'lucide-react';
+
+
 
 const HomePage = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -96,12 +99,12 @@ const HomePage = () => {
               <span className="text-emerald-400 font-semibold mx-1">Ministère des Affaires Sociales</span>.
             </p>
             <div className="flex flex-wrap gap-4">
-              <button className="bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-lg font-medium transition flex items-center gap-2">
+              <Link href="/missions" className="border border-slate-700 hover:bg-slate-800 px-8 py-3 rounded-lg font-medium transition">
                 Nos Missions <ArrowRight size={18} />
-              </button>
-              <button className="border border-slate-700 hover:bg-slate-800 px-8 py-3 rounded-lg font-medium transition">
+              </Link>
+              <Link href="/rapports" className="border border-slate-700 hover:bg-slate-800 px-8 py-3 rounded-lg font-medium transition">
                 Rapports Annuels
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -144,7 +147,7 @@ const HomePage = () => {
               </div>
               <div className="bg-slate-50 p-8 rounded-2xl text-center border border-slate-100">
                 <span className="block text-4xl font-bold text-blue-600">100%</span>
-                <span className="text-slate-500 text-xs uppercase tracking-widest font-bold">Engagement</span>
+                <span className="text-slate-500 text-xs uppercase tracking-widest font-bold">Implication & Rigueur du suivi</span>
               </div>
             </div>
           </div>
@@ -175,26 +178,24 @@ const HomePage = () => {
       {/* Section Contact & Adresses */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-6 grid lg:grid-cols-3 gap-12">
-          <div className="lg:col-span-1">
+          <div>
             <h3 className="text-2xl font-bold mb-6">Nous Contacter</h3>
-            <ul className="space-y-6">
-              <li className="flex items-start gap-4">
+            <div className="space-y-4">
+              <div className="flex items-start gap-4">
                 <MapPin className="text-blue-600 shrink-0" size={24} />
                 <div>
                   <p className="font-bold text-sm uppercase tracking-wider text-slate-400 mb-1">Siège Social</p>
                   <p className="text-slate-800 font-medium">Kinsenda Kitotwe, Territoire de SAKANIA</p>
                   <p className="text-slate-600 text-sm italic">Secteur de BALAMBA, KASUMBALESA</p>
                 </div>
-              </li>
-              <li className="flex items-center gap-4">
-                <Phone className="text-blue-600 shrink-0" size={20} />
-                <p className="text-slate-800 font-medium">+243 97 339 3640</p>
-              </li>
-              <li className="flex items-center gap-4">
-                <Mail className="text-blue-600 shrink-0" size={20} />
-                <p className="text-slate-800 font-medium">dotkicc03@gmail.com</p>
-              </li>
-            </ul>
+              </div>
+              <div className="flex items-center gap-3 text-slate-500 text-sm">
+                <Phone size={16} /> +243 97 339 3640
+              </div>
+              <div className="flex items-center gap-3 text-slate-500 text-sm">
+                <Mail size={16} /> dotkicc03@gmail.com
+              </div>
+            </div>
           </div>
 
           <div className="lg:col-span-1 text-center lg:text-left">
