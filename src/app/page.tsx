@@ -66,7 +66,7 @@ const HomePage = () => {
               </div>
               <p className="max-w-2xl">
                 Nous utilisons des cookies pour optimiser votre expérience sur le portail de la <strong>DOT KICC</strong>. 
-                Ces outils nous permettent d'assurer la sécurité et la performance de nos services.
+                Ces outils nous permettent d assurer la sécurité et la performance de nos services.
               </p>
             </div>
             <div className="flex gap-3 shrink-0">

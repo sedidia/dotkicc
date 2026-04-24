@@ -139,7 +139,7 @@ export default function UploadPage({message, onClose}) {
       
     } catch (error) {
       console.error('Erreur d\'envoi:', error.response ? error.response.data : error.successMessage);
-      setSuccessMessage(`Échec de l'envoi: 'Erreur réseau.'}`);
+      setSuccessMessage(`Échec de l envoi: 'Erreur réseau.'}`);
     }
   };
   
@@ -252,7 +252,7 @@ export default function UploadPage({message, onClose}) {
           />
           <div>
             <label htmlFor="image" className="block text-sm font-medium text-gray-700 mb-2">
-                Image de l'Activité (sera stockée dans le Cloud)
+                Image de l Activité (sera stockée dans le Cloud)
             </label>
             <div className="flex items-center space-x-4">
               <label 
