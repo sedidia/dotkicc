@@ -91,7 +91,7 @@ const HomePage = () => {
           <div className="max-w-3xl">
             <h1 className="text-5xl font-bold tracking-tight mb-6">DOT KICC</h1>
             <p className="text-xl text-slate-300 mb-8 leading-relaxed">
-              Organe de coordination stratégique et spécialisée unissant l'expertise du 
+              Organe de coordination stratégique et spécialisée unissant l expertise du 
               <span className="text-blue-400 font-semibold mx-1">Ministère des Mines</span> et du 
               <span className="text-emerald-400 font-semibold mx-1">Ministère des Affaires Sociales</span>.
             </p>
@@ -114,7 +114,7 @@ const HomePage = () => {
             <div>
               <h2 className="text-3xl font-bold mb-6">Une Synergie Institutionnelle</h2>
               <p className="text-slate-600 mb-6 italic">
-                "La DOT KICC assure le suivi des engagements sociaux découlant de l'exploitation minière pour un développement durable et inclusif."
+                La DOT KICC assure le suivi des engagements sociaux découlant de l exploitation minière pour un développement durable et inclusif.
               </p>
               <div className="space-y-4">
                 <div className="flex items-start gap-4">
@@ -123,7 +123,7 @@ const HomePage = () => {
                   </div>
                   <div>
                     <h4 className="font-bold font-semibold uppercase tracking-tight text-sm">Expertise Mines</h4>
-                    <p className="text-sm text-slate-500">Régulation technique et suivi de l'exploitation des ressources.</p>
+                    <p className="text-sm text-slate-500">Régulation technique et suivi de l exploitation des ressources.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -154,12 +154,12 @@ const HomePage = () => {
       {/* Axes d'Intervention */}
       <section className="py-20 bg-slate-50">
         <div className="container mx-auto px-6 text-center mb-16">
-          <h2 className="text-3xl font-bold mb-4">Axes d'Intervention</h2>
+          <h2 className="text-3xl font-bold mb-4">Axes d Intervention</h2>
           <div className="h-1.5 w-16 bg-blue-600 mx-auto rounded-full"></div>
         </div>
         <div className="container mx-auto px-6 grid md:grid-cols-3 gap-8">
             {[
-              { title: "Suivi Environnemental", desc: "Contrôle de l'impact des activités extractives sur les écosystèmes locaux.", icon: <ShieldCheck size={32} className="text-blue-600" /> },
+              { title: "Suivi Environnemental", desc: "Contrôle de l impact des activités extractives sur les écosystèmes locaux.", icon: <ShieldCheck size={32} className="text-blue-600" /> },
               { title: "Développement Communautaire", desc: "Gestion des dotations pour les infrastructures de base (écoles, santé).", icon: <Users size={32} className="text-blue-600" /> },
               { title: "Médiation Sociale", desc: "Arbitrage des différends entre opérateurs miniers et populations riveraines.", icon: <HeartHandshake size={32} className="text-blue-600" /> }
             ].map((item, index) => (
@@ -199,7 +199,7 @@ const HomePage = () => {
 
           <div className="lg:col-span-1 text-center lg:text-left">
             <h3 className="text-2xl font-bold mb-6">Suivez-nous</h3>
-            <p className="text-slate-600 mb-6 text-sm">Rejoignez notre communauté pour suivre l'impact de nos actions sociales.</p>
+            <p className="text-slate-600 mb-6 text-sm">Rejoignez notre communauté pour suivre l impact de nos actions sociales.</p>
             <div className="flex gap-4 justify-center lg:justify-start">
               <a href="https://web.facebook.com/profile.php?id=100090353215433" target="_blank" rel="noopener noreferrer" className="p-3 bg-slate-100 hover:bg-blue-600 hover:text-white rounded-full transition-all duration-300 shadow-sm">
                 <Facebook size={20} />
@@ -213,7 +213,7 @@ const HomePage = () => {
           <div className="lg:col-span-1">
             <div className="bg-slate-900 p-8 rounded-2xl text-white shadow-xl relative overflow-hidden group">
               <div className="absolute top-0 right-0 w-24 h-24 bg-blue-600/10 rounded-full -mr-12 -mt-12 transition-transform group-hover:scale-150 duration-700"></div>
-              <h4 className="text-xl font-bold mb-4 text-center border-b border-slate-700 pb-2">Heures d'ouverture</h4>
+              <h4 className="text-xl font-bold mb-4 text-center border-b border-slate-700 pb-2">Heures d ouverture</h4>
               <div className="space-y-3 text-slate-300 text-sm mt-4 relative z-10">
                 <p className="flex justify-between"><span>Lundi - Vendredi</span> <span className="text-blue-400">08h00 - 16h30</span></p>
                 <p className="flex justify-between"><span>Samedi</span> <span className="text-blue-400">09h00 - 12h00</span></p>

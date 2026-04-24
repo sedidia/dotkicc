@@ -17,7 +17,6 @@ import { Lock, User, CheckCircle, X, PlusCircle, ImageIcon    } from 'lucide-rea
  * @param {function} props.onClose - Fonction appelée pour fermer le Toast.
  */
 const SuccessToast = ({ message, onClose }) => {
-  const [imageFile, setImageFile] = useState<File | null>(null);
     
     // Fermeture automatique après 4 secondes
     useEffect(() => {
@@ -161,8 +160,7 @@ export default function UploadPage({message, onClose}) {
       try {
         const response = await fetch('/api/collections');
         const datas = await response.json();        
-        console.log(datas.collections.find(collection => collection.name === 'users').data); // Accédez à la propriété collections
-        setUsers(datas.collections.find(collection => collection.name === "users").data) 
+        // setUsers(datas.collections.find(collection => collection.name === "users").data) 
       } catch (error) {
         console.error('Erreur lors de la récupération des collections:', error);
       }
@@ -266,14 +264,9 @@ export default function UploadPage({message, onClose}) {
               </label>
               <input
                   id="image-upload"
-                  type="file"
-                  accept="image/*"
-                  onChange={(e) => setImageFile(e.target.files ? e.target.files[0] : null)}
+                  type="text"
                   className="hidden"
               />
-              <span className="text-sm text-gray-500 truncate">
-                  {imageFile ? imageFile.name : 'Aucun fichier sélectionné'}
-              </span>
             </div>
           </div>
 

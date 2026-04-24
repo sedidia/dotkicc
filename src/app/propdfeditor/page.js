@@ -1,4 +1,5 @@
 "use client";
+import Image from 'next/image';
 
 import React, { useState, useRef, useEffect } from 'react';
 import { PDFDocument, PageSizes } from 'pdf-lib';
@@ -124,6 +125,7 @@ const PdfEditor = () => {
       if (videoRef.current) videoRef.current.srcObject = stream;
     } catch (err) {
       alert("Erreur caméra.");
+      console.log(err);
       setIsCameraOpen(false);
     }
   };
@@ -177,7 +179,7 @@ const PdfEditor = () => {
         }
       }
       setPages(prev => [...prev, ...extractedPages]);
-    } catch (err) { alert("Erreur."); }
+    } catch (err) { alert(err); }
     finally { setIsProcessing(false); if (fileInputRef.current) fileInputRef.current.value = ""; }
   };
 
@@ -205,7 +207,7 @@ const PdfEditor = () => {
       a.href = URL.createObjectURL(new Blob([bytes], { type: 'application/pdf' }));
       a.download = `${fileName}.pdf`;
       a.click();
-    } catch (err) { alert("Erreur fusion."); }
+    } catch (err) { alert(err); }
     finally { setIsProcessing(false); }
   };
 
@@ -244,7 +246,7 @@ const PdfEditor = () => {
             {/* Zone de rognage scrollable */}
             <div className="flex-grow overflow-y-auto bg-gray-50 border rounded-xl flex justify-center items-start p-2">
                <ReactCrop crop={crop} onChange={c => setCrop(c)} onComplete={c => setCompletedCrop(c)}>
-                <img 
+                <Image 
                   ref={imgRef} 
                   src={editingPage.thumbnail} 
                   onLoad={(e) => {
@@ -299,7 +301,7 @@ const PdfEditor = () => {
                         onClick={() => p.type === 'image' && setEditingPage(p)}
                       >
                         <div className="aspect-[3/4] flex items-center justify-center p-2">
-                          <img src={p.thumbnail} className="max-w-full max-h-full object-contain pointer-events-none rounded shadow-sm" />
+                          <Image src={p.thumbnail} alt="cool image" className="max-w-full max-h-full object-contain pointer-events-none rounded shadow-sm" />
                         </div>
                         <div className="p-2 bg-gray-50 flex border-t">
                             <button onClick={(e) => { e.stopPropagation(); setPages(pages.filter(x => x.id !== p.id)); }} className="w-full text-[10px] font-bold text-red-500 uppercase">Supprimer</button>
