@@ -157,14 +157,15 @@ export default function UploadPage({message, onClose}) {
 
 
     const fetchUsers = async () => {
-      try {
-        const response = await fetch('/api/collections');
-        // const datas = await response.json();        
-        // setUsers(datas.collections.find(collection => collection.name === "users").data) 
-        setUsers([]) 
-      } catch (error) {
-        console.error('Erreur lors de la récupération des collections:', error);
-      }
+      setUsers([])
+      // try {
+      //   const response = await fetch('/api/collections');
+      //   const datas = await response.json();        
+      //   setUsers(datas.collections.find(collection => collection.name === "users").data) 
+      //   setUsers([]) 
+      // } catch (error) {
+      //   console.error('Erreur lors de la récupération des collections:', error);
+      // }
     };
   
     fetchUsers();
