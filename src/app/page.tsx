@@ -1,505 +1,241 @@
-// import Link from 'next/link';
-import { Metadata } from 'next';
-import Footer from './components/footer';
+"use client";
 
-
+import React, { useState, useEffect } from 'react';
 import { 
-  ArrowRight, TrendingUp, Users, Briefcase, 
-  Camera, Zap, ChevronRight // Ajouté pour la section Galerie
+  Users, HardHat, HeartHandshake, ShieldCheck, ArrowRight, 
+  Mail, Phone, MapPin, Facebook, Linkedin, Loader2, Shield 
 } from 'lucide-react';
-import Image from 'next/image';
 
+const HomePage = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [showCookies, setShowCookies] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
 
+  useEffect(() => {
+    // 1. Fin du chargement initial (1.5s)
+    const loadTimer = setTimeout(() => {
+      setIsLoading(false);
+      
+      // 2. Une fois le chargement fini, on attend 4 secondes pour afficher les cookies
+      const cookieTimer = setTimeout(() => {
+        const hasAccepted = localStorage.getItem('dot-kicc-cookies');
+        if (!hasAccepted) {
+          setIsAnimating(true); // Déclenche l'animation
+          setShowCookies(true);
+        }
+      }, 4000); // Délai de 4 secondes
 
-// objects
-const mockStats = [
-  { value: "5.2M", label: "Chiffre d Affaires (€)", icon: TrendingUp, color: "text-indigo-600" },
-  { value: "450+", label: "Membres Actifs", icon: Users, color: "text-green-600" },
-  { value: "120", label: "Projets Réalisés", icon: Briefcase, color: "text-yellow-600" },
-];
-// objects
+      return () => clearTimeout(cookieTimer);
+    }, 1500);
 
+    return () => clearTimeout(loadTimer);
+  }, []);
 
-// **********************************************
-// 1. Définition des Métadonnées pour le SEO
-// **********************************************
-export const metadata: Metadata = {
-  title: "Accueil - DOT KICC",
-  description: "Découvrez toutes les activités et les dernières nouvelles de notre entreprise. Explorez les formations, les ateliers et les événements à venir.",
-  keywords: ['activités', 'entreprise', 'formation', 'événements', 'blog', 'actualités'],
-  openGraph: {
-    title: "DOT KICC - Accueil",
-    description: "La page d accueil incontournable pour les activités de notre entreprise.",
-    url: '/',
-    siteName: 'DOT KICC',
-    // Ajoutez ici une image si vous en avez une dans /public
-    // images: [{ url: '/opengraph-image.png' }],
-  },
+  const acceptCookies = () => {
+    setIsAnimating(false); // Lance l'animation de sortie
+    setTimeout(() => {
+      localStorage.setItem('dot-kicc-cookies', 'true');
+      setShowCookies(false);
+    }, 500); // Attend la fin de l'animation pour supprimer du DOM
+  };
+
+  if (isLoading) {
+    return (
+      <div className="fixed inset-0 bg-slate-900 flex flex-col items-center justify-center z-50">
+        <Loader2 className="text-blue-500 animate-spin mb-4" size={48} />
+        <h2 className="text-white font-bold text-xl tracking-widest animate-pulse">DOT KICC</h2>
+        <p className="text-slate-400 text-sm mt-2 font-light italic">Chargement des ressources...</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-white text-slate-900 relative overflow-x-hidden">
+      
+      {/* --- Bannière de Cookies avec animation fluide --- */}
+      {showCookies && (
+        <div 
+          className={`fixed bottom-0 left-0 right-0 z-50 p-4 md:p-6 bg-white border-t border-slate-200 shadow-[0_-10px_25px_rgba(0,0,0,0.1)] transition-transform duration-700 ease-in-out ${
+            isAnimating ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
+          }`}
+        >
+          <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-4 text-slate-600 text-sm md:text-base">
+              <div className="bg-blue-50 p-2 rounded-full">
+                <Shield className="text-blue-600 shrink-0" size={24} />
+              </div>
+              <p className="max-w-2xl">
+                Nous utilisons des cookies pour optimiser votre expérience sur le portail de la <strong>DOT KICC</strong>. 
+                Ces outils nous permettent d'assurer la sécurité et la performance de nos services.
+              </p>
+            </div>
+            <div className="flex gap-3 shrink-0">
+              <button 
+                onClick={acceptCookies}
+                className="bg-blue-600 text-white px-8 py-2 rounded-lg hover:bg-blue-700 transition-colors font-medium shadow-md active:scale-95"
+              >
+                Accepter
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Hero Section */}
+      <header className="relative bg-slate-900 py-24 text-white">
+        <div className="absolute inset-0 overflow-hidden opacity-20">
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-900 to-transparent" />
+        </div>
+        
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="max-w-3xl">
+            <h1 className="text-5xl font-bold tracking-tight mb-6">DOT KICC</h1>
+            <p className="text-xl text-slate-300 mb-8 leading-relaxed">
+              Organe de coordination stratégique et spécialisée unissant l'expertise du 
+              <span className="text-blue-400 font-semibold mx-1">Ministère des Mines</span> et du 
+              <span className="text-emerald-400 font-semibold mx-1">Ministère des Affaires Sociales</span>.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <button className="bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-lg font-medium transition flex items-center gap-2">
+                Nos Missions <ArrowRight size={18} />
+              </button>
+              <button className="border border-slate-700 hover:bg-slate-800 px-8 py-3 rounded-lg font-medium transition">
+                Rapports Annuels
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {/* Partenariat Inter-Ministériel */}
+      <section className="py-20 border-b border-slate-100">
+        <div className="container mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-3xl font-bold mb-6">Une Synergie Institutionnelle</h2>
+              <p className="text-slate-600 mb-6 italic">
+                "La DOT KICC assure le suivi des engagements sociaux découlant de l'exploitation minière pour un développement durable et inclusif."
+              </p>
+              <div className="space-y-4">
+                <div className="flex items-start gap-4">
+                  <div className="p-2 bg-blue-50 text-blue-600 rounded-md shrink-0">
+                    <HardHat size={24} />
+                  </div>
+                  <div>
+                    <h4 className="font-bold font-semibold uppercase tracking-tight text-sm">Expertise Mines</h4>
+                    <p className="text-sm text-slate-500">Régulation technique et suivi de l'exploitation des ressources.</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="p-2 bg-emerald-50 text-emerald-600 rounded-md shrink-0">
+                    <HeartHandshake size={24} />
+                  </div>
+                  <div>
+                    <h4 className="font-bold font-semibold uppercase tracking-tight text-sm">Affaires Sociales</h4>
+                    <p className="text-sm text-slate-500">Protection des communautés et redistribution des bénéfices sociaux.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="bg-slate-50 p-8 rounded-2xl text-center border border-slate-100">
+                <span className="block text-4xl font-bold text-blue-600">02</span>
+                <span className="text-slate-500 text-xs uppercase tracking-widest font-bold">Ministères</span>
+              </div>
+              <div className="bg-slate-50 p-8 rounded-2xl text-center border border-slate-100">
+                <span className="block text-4xl font-bold text-blue-600">100%</span>
+                <span className="text-slate-500 text-xs uppercase tracking-widest font-bold">Engagement</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Axes d'Intervention */}
+      <section className="py-20 bg-slate-50">
+        <div className="container mx-auto px-6 text-center mb-16">
+          <h2 className="text-3xl font-bold mb-4">Axes d'Intervention</h2>
+          <div className="h-1.5 w-16 bg-blue-600 mx-auto rounded-full"></div>
+        </div>
+        <div className="container mx-auto px-6 grid md:grid-cols-3 gap-8">
+            {[
+              { title: "Suivi Environnemental", desc: "Contrôle de l'impact des activités extractives sur les écosystèmes locaux.", icon: <ShieldCheck size={32} className="text-blue-600" /> },
+              { title: "Développement Communautaire", desc: "Gestion des dotations pour les infrastructures de base (écoles, santé).", icon: <Users size={32} className="text-blue-600" /> },
+              { title: "Médiation Sociale", desc: "Arbitrage des différends entre opérateurs miniers et populations riveraines.", icon: <HeartHandshake size={32} className="text-blue-600" /> }
+            ].map((item, index) => (
+              <div key={index} className="bg-white p-8 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 border-b-4 border-transparent hover:border-blue-600">
+                <div className="mb-4">{item.icon}</div>
+                <h3 className="text-xl font-bold mb-3">{item.title}</h3>
+                <p className="text-slate-600 text-sm leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+        </div>
+      </section>
+
+      {/* Section Contact & Adresses */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-6 grid lg:grid-cols-3 gap-12">
+          <div className="lg:col-span-1">
+            <h3 className="text-2xl font-bold mb-6">Nous Contacter</h3>
+            <ul className="space-y-6">
+              <li className="flex items-start gap-4">
+                <MapPin className="text-blue-600 shrink-0" size={24} />
+                <div>
+                  <p className="font-bold text-sm uppercase tracking-wider text-slate-400 mb-1">Siège Social</p>
+                  <p className="text-slate-800 font-medium">Kinsenda Kitotwe, Territoire de SAKANIA</p>
+                  <p className="text-slate-600 text-sm italic">Secteur de BALAMBA, KASUMBALESA</p>
+                </div>
+              </li>
+              <li className="flex items-center gap-4">
+                <Phone className="text-blue-600 shrink-0" size={20} />
+                <p className="text-slate-800 font-medium">+243 97 339 3640</p>
+              </li>
+              <li className="flex items-center gap-4">
+                <Mail className="text-blue-600 shrink-0" size={20} />
+                <p className="text-slate-800 font-medium">dotkicc03@gmail.com</p>
+              </li>
+            </ul>
+          </div>
+
+          <div className="lg:col-span-1 text-center lg:text-left">
+            <h3 className="text-2xl font-bold mb-6">Suivez-nous</h3>
+            <p className="text-slate-600 mb-6 text-sm">Rejoignez notre communauté pour suivre l'impact de nos actions sociales.</p>
+            <div className="flex gap-4 justify-center lg:justify-start">
+              <a href="https://web.facebook.com/profile.php?id=100090353215433" target="_blank" rel="noopener noreferrer" className="p-3 bg-slate-100 hover:bg-blue-600 hover:text-white rounded-full transition-all duration-300 shadow-sm">
+                <Facebook size={20} />
+              </a>
+              <a href="https://www.linkedin.com/in/sedidia/" target="_blank" rel="noopener noreferrer" className="p-3 bg-slate-100 hover:bg-blue-700 hover:text-white rounded-full transition-all duration-300 shadow-sm">
+                <Linkedin size={20} />
+              </a>
+            </div>
+          </div>
+
+          <div className="lg:col-span-1">
+            <div className="bg-slate-900 p-8 rounded-2xl text-white shadow-xl relative overflow-hidden group">
+              <div className="absolute top-0 right-0 w-24 h-24 bg-blue-600/10 rounded-full -mr-12 -mt-12 transition-transform group-hover:scale-150 duration-700"></div>
+              <h4 className="text-xl font-bold mb-4 text-center border-b border-slate-700 pb-2">Heures d'ouverture</h4>
+              <div className="space-y-3 text-slate-300 text-sm mt-4 relative z-10">
+                <p className="flex justify-between"><span>Lundi - Vendredi</span> <span className="text-blue-400">08h00 - 16h30</span></p>
+                <p className="flex justify-between"><span>Samedi</span> <span className="text-blue-400">09h00 - 12h00</span></p>
+                <p className="flex justify-between border-t border-slate-700 pt-3 mt-2 font-semibold"><span>Dimanche</span> <span className="text-red-400">Fermé</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-slate-950 text-slate-500 py-12 border-t border-slate-900">
+        <div className="container mx-auto px-6 text-center">
+          <p className="text-white font-bold text-xl mb-1 tracking-tight">DOT KICC</p>
+          <p className="text-xs uppercase tracking-[0.3em] mb-8 text-blue-500/80">Ministère des Mines & Affaires Sociales</p>
+          <div className="text-[10px] border-t border-slate-900 pt-8 uppercase tracking-widest opacity-50">
+            &copy; {new Date().getFullYear()} DOT KICC RD CONGO. Tous droits réservés.
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
 };
 
-// **********************************************
-// 2. Fonctions de Récupération des Données (Serveur)
-// **********************************************
-
-// 1. Définir le type des données contenues dans le tableau 'data'
-interface Activite {
-    _id: string; // MongoDB IDs sont souvent des strings
-    titre: string;
-    ladate: string;
-    description: string;
-    laphoto: string;
-    // ... Ajoutez tous les autres champs ici
-}
-
-// 2. Définir la structure d un élément de la collection
-interface CollectionItem {
-    name: string;
-    data: Activite[]; // Le tableau de données utilise l interface Activite
-    // Si d autres collections existent, vous pouvez utiliser 'any[]' pour leur 'data'
-    // mais le mieux est d utiliser un 'Union Type' ou un 'Generic' si possible.
-    // Pour simplifier, nous utilisons ici un type qui couvre au moins 'activites'.
-}
-
-// 3. Définir la structure complète des données reçues
-interface CollectionResponse {
-    collections: CollectionItem[];
-}
-
-
-
-
-
-
-
-
-// --- DÉFINITION DES TYPES ---
-
-/**
- * Interface pour les props des icônes SVG.
- * Inclut l'attribut 'className' commun pour les styles Tailwind.
- */
-interface IconProps {
-    className?: string;
-}
-
-/**
- * Interface pour les props du composant Link (simulé).
- */
-interface LinkProps {
-    href: string;
-    className: string;
-    children: React.ReactNode;
-}
-
-// --- DÉFINITION DES COMPOSANTS ---
-
-// L'erreur est résolue ici en typant explicitement 'props' avec 'IconProps'
-const MenuIcon = (props: IconProps) => (
-    <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-);
-
-// L'erreur est résolue ici en typant explicitement 'props' avec 'IconProps'
-const XIcon = (props: IconProps) => (
-    <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-);
-
-// Composant Link simulé, typé avec 'LinkProps'
-const Link = ({ href, className, children }: LinkProps) => <a href={href} className={className}>{children}</a>;
-
-
-
-
-
-
-/**
- * Récupère le tableau des activités à partir du Route Handler /api/collections.
- * Cette fonction est exécutée côté Serveur.
- */
-async function getActivites(): Promise<Activite[]> {
-  // NEXT_PUBLIC_BASE_UR
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_UR || 'http://localhost:3000';
-  const url = `${baseUrl}/api/collections`;
-
-  try {
-    const response = await fetch(url, { cache: 'no-store' }); 
-    
-    if (!response.ok) {
-        console.error(`Erreur HTTP lors du fetch des collections: ${response.status}`);
-        return [];
-    }
-
-    // const datas = await response.json();
-    const datas: CollectionResponse = await response.json();
-
-    // Logique de récupération sécurisée et robuste (avec chaînage optionnel)
-    const activites = datas?.collections
-        .find((collection) => collection.name === 'activites')
-        ?.data || [];
-        
-    return activites as Activite[];
-
-  } catch (error) {
-    console.error('Erreur lors de la récupération des activités (Serveur):', error);
-    return []; // Retourne un tableau vide en cas d échec
-  }
-}
-
-// **********************************************
-// 3. Composant de la Page d Accueil (Serveur)
-// **********************************************
-
-export default async function Home() {
-    
-    // Chargement synchrone des données pendant le rendu du Serveur
-    const activites = await getActivites();
-
-    const navItems = [
-      { name: "Tableau de bord", href: "/activityCreate" },
-      { name: "Accueil", href: "#home" },
-      { name: "Activités", href: "/collections" },
-      { name: "Galerie", href: "#gallery" }, // Nouvelle entrée
-      { name: "Mission", href: "#mission" },
-      { name: "Direction", href: "#ceo" },
-    ];
-    // LA NAV
-
-
-    // LA NAV
-
-    const mockCEO = {
-      nom: "CEO Idris sedidia",
-      titre: "Directeur Général",
-      citation: "Notre vision est de transformer l ambition en impact réel, en plaçant l humain au cœur de chaque innovation.",
-      imagePlaceholder: "https://placehold.co/150x150/5B21B6/ffffff?text=E.V."
-    };
-    
-    // --- GALERIE DE PHOTOS (Utilisation des données fournies) ---
-    
-    const categories = [
-      { id: 'Tous', label: 'Toutes les Catégories', icon: Camera, colorClass: 'bg-indigo-600' },
-      { id: 'Missions', label: 'Missions Client', icon: Briefcase, colorClass: 'bg-green-600' },
-      { id: 'Événements', label: 'Événements et Réseautage', icon: Zap, colorClass: 'bg-red-600' },
-      { id: 'Autres', label: 'Vie d Entreprise', icon: ChevronRight, colorClass: 'bg-yellow-600' },
-    ];
-    
-
-    return (
-        <div className="min-h-screen flex flex-col bg-gray-50 font-inter">
-            <header className="bg-indigo-600 text-white py-1 shadow-xl">
-            </header>
-
-            <nav className="sticky top-0 z-[100] bg-white shadow-lg font-['Inter']">
-              
-              {/* 1. L'état CSS (Checkbox) : Caché et devient le "pair" des labels */}
-              <input 
-                  type="checkbox" 
-                  id="mobile-menu-toggle" 
-                  className="peer hidden" 
-                  aria-hidden="true"
-              />
-
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                  <div className="flex justify-between items-center h-16">
-                      
-                      {/* Nom de l'application / Logo */}
-                      <div className="flex items-center">
-                          <span className="text-2xl font-bold text-indigo-700 rounded-lg p-1">
-                              DOT KICC
-                          </span>
-                      </div>
-
-                      {/* 2. Menu Desktop (Visible sur PC, caché sur mobile) */}
-                      <div className="hidden md:flex space-x-8">
-                          {navItems.map((item) => (
-                              <Link 
-                                  key={item.name} 
-                                  href={item.href} 
-                                  className="text-gray-600 hover:text-indigo-700 font-semibold transition duration-200 py-2 rounded-md px-3"
-                              >
-                                  {item.name}
-                              </Link>
-                          ))}
-                      </div>
-
-                      {/* 3. Bouton Hamburger Mobile (Visible seulement sur mobile) */}
-                      <div className="md:hidden">
-                          {/* Le Label ouvre le menu en cochant la checkbox */}
-                          <label 
-                              htmlFor="mobile-menu-toggle" 
-                              className="inline-flex items-center justify-center p-2 rounded-full text-indigo-600 hover:bg-indigo-50 focus:outline-none transition duration-150 cursor-pointer"
-                              aria-label="Toggle menu"
-                          >
-                              <MenuIcon className="h-6 w-6" />
-                          </label>
-                      </div>
-
-                  </div>
-              </div>
-              
-              {/* 4. Le Menu Coulissant (Mobile Drawer) */}
-              
-              {/* Overlay sombre : Clic ferme le menu */}
-              <label 
-                  htmlFor="mobile-menu-toggle" 
-                  className="fixed inset-0 bg-black/50 z-[90] 
-                            md:hidden transition-opacity duration-300 pointer-events-none opacity-0
-                            peer-checked:opacity-100 peer-checked:pointer-events-auto"
-                  aria-label="Fermer le menu"
-              />
-
-              {/* Le tiroir lui-même : Utilise peer-checked pour l'animation de translation */}
-              <div 
-                  className="fixed inset-y-0 left-0 h-full w-64 bg-white shadow-2xl overflow-y-auto z-[95] 
-                            transform transition-transform duration-300 ease-in-out 
-                            -translate-x-full 
-                            peer-checked:translate-x-0 md:hidden p-4"
-                  role="dialog"
-                  aria-modal="true"
-              >
-                  <div className="flex justify-between items-center mb-6 border-b pb-4">
-                      <span className="text-xl font-bold text-indigo-700">LA DOT KICC</span>
-                      
-                      {/* Bouton de fermeture (X) */}
-                      <label 
-                          htmlFor="mobile-menu-toggle" 
-                          className="p-2 rounded-full text-gray-500 hover:bg-gray-100 transition duration-150 cursor-pointer"
-                          aria-label="Fermer"
-                      >
-                          <XIcon className="h-6 w-6" />
-                      </label>
-                  </div>
-                  
-                  {/* Liens du Menu Mobile */}
-                  <div className="flex flex-col space-y-2">
-                      {navItems.map((item) => (
-                          <Link key={item.name} href={item.href} className="block w-full cursor-pointer w-full text-left px-4 py-2 text-base font-medium text-gray-700 rounded-lg hover:bg-indigo-50 hover:text-indigo-600 transition duration-150">
-                            {item.name}
-                              {/* <label htmlFor="mobile-menu-toggle" className="block w-full cursor-pointer">
-                              </label> */}
-                          </Link>
-                      ))}
-                  </div>
-              </div>
-            </nav>
-            {/* =========================================== */}
-            <main className="flex-grow">
-              {/* 2. Carousel Home (Hero Section) */}
-              <section id="home" className="relative h-[60vh] bg-indigo-700 flex items-center justify-center overflow-hidden">
-                <div 
-                  className="absolute inset-0 opacity-20 bg-cover bg-center"
-                  style={{ 
-                    backgroundImage: `url('https://placehold.co/1200x600/3730A3/FFFFFF/png?text=Bienvenue+%C3%A0+DOT KICC')`, 
-                  }}
-                ></div>
-                
-                <div className="relative z-10 text-center p-8 max-w-3xl">
-                  <h2 className="text-5xl md:text-6xl font-extrabold text-white leading-tight mb-4 drop-shadow-lg">
-                    Façonner l Avenir, Ensemble.
-                  </h2>
-                  <p className="text-xl text-indigo-100 mb-8 drop-shadow-md">
-                    Votre partenaire de confiance pour l innovation et la croissance durable.
-                  </p>
-                  <Link 
-                    href="/collections" 
-                    className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-lg text-indigo-700 bg-white hover:bg-indigo-50 transition duration-300 transform hover:scale-105"
-                  >
-                    Découvrez nos Activités
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Link>
-                </div>
-              </section>
-              {/* 2. Carousel Home (Hero Section) */}
-
-              {/* 3. Chiffre d affaires & Membres (Statistiques) */}
-              <section className="py-16 bg-white">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                  <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
-                    Notre Impact en Chiffres
-                  </h2>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {mockStats.map((stat) => (
-                      <div key={stat.label} className="bg-white p-8 rounded-xl shadow-lg text-center border-b-4 border-indigo-500 transform transition duration-500 hover:scale-[1.02]">
-                        <stat.icon className={`w-10 h-10 mx-auto mb-4 ${stat.color}`} />
-                        <p className="text-5xl font-extrabold text-gray-900">
-                          {stat.value}
-                        </p>
-                        <p className="mt-2 text-lg font-medium text-gray-500">
-                          {stat.label}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </section>
-              {/* 3. Chiffre d affaires & Membres (Statistiques) */}
-
-              {/* activités recentes */}
-              <section id="activities" className="py-20 bg-gray-50">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                  <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
-                    Nos Dernières Activités
-                  </h2>
-
-                  {activites.length > 0 ? (
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                      {activites.map((activite) => (
-                        <div key={activite._id} className="bg-white p-6 rounded-xl shadow-lg border-t-8 border-yellow-500 flex flex-col hover:shadow-2xl transition duration-300">
-                          <div className="w-full h-48 bg-gray-200 overflow-hidden">
-                            {/* Si l image existe, on l affiche */}
-                            {activite.laphoto ? (
-                              <Image // <-- Utilisation du composant Next.js Image
-                                src={activite.laphoto} 
-                                alt={activite.titre} 
-                                width={100}
-                                height={70}
-                                // unoptimized
-                                style={{ objectFit: 'cover' }}
-                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                className="w-full h-full object-cover transition duration-300 hover:scale-105"
-                              />
-
-                              ) : (
-                              <div className="w-full h-full flex items-center justify-center text-gray-400">
-                                [Image de la collection]
-                              </div>
-                            )}
-
-
-                          </div>
-
-                          <div className="p-6">
-                            <p className="text-sm font-medium text-indigo-500 mb-1">
-                                {new Date(activite.ladate).toLocaleDateString('fr-FR')}
-                            </p>
-                            <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2">
-                                {activite.titre}
-                            </h3>
-                            <p className="text-gray-600 mb-4 line-clamp-3">
-                                          {activite.description}
-                            </p>
-
-                            <Link 
-                                className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-yellow-500 hover:bg-yellow-600 transition duration-150" 
-                                href={`/collections/${activite._id}`}
-                            >
-                                Voir les détails →
-                            </Link>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="text-center py-10 border-2 border-dashed border-gray-300 rounded-lg">
-                      <p className="text-lg text-gray-600">
-                        {/* Message affiché si la collection est vide ou en cas d erreur */}
-                        Aucune activité n a été trouvée.
-                      </p>
-                      <p className="text-sm text-gray-400 mt-2">
-                        Les nouvelles activités seront affichées ici.
-                      </p>
-                    </div>
-                  )}
-                        
-                </div>
-              </section>
-              {/* activités recentes */}
-
-
-              {/* 5. GALERIE DE PHOTOS (STATIQUE) - NOUVELLE SECTION */}
-              <section id="gallery" className="py-20 bg-white">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                  <h2 className="text-4xl font-extrabold text-gray-900 text-center mb-4">
-                    Galerie : Moments Forts en Images
-                  </h2>
-                  <p className="text-xl text-gray-600 text-center mb-12 max-w-3xl mx-auto">
-                    Revivez nos projets, événements et la vie d équipe.
-                  </p>
-
-                  {/* Boutons de Catégorie (Statiques/Décoratifs) */}
-                  <div className="flex flex-wrap justify-center space-x-2 space-y-2 md:space-y-0 mb-12">
-                    {categories.map((cat, index) => {
-                      const Icon = cat.icon;
-                      // Le premier bouton est stylisé comme "actif" pour l apparence statique
-                      const isActive = index === 0; 
-
-                      return (
-                        <Link
-                          key={cat.id}
-                          href="#"
-                          className={`
-                            flex items-center px-5 py-2 rounded-full font-medium shadow-md transition duration-300
-                            ${isActive 
-                              ? 'bg-indigo-600 text-white' 
-                              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                            }
-                          `}
-                          aria-disabled={true} 
-                        >
-                          <Icon className="w-5 h-5 mr-2" />
-                          {cat.label}
-                        </Link>
-                      );
-                    })}
-                  </div>
-
-
-                  {/* 6. Ce que nous faisons (Mission) */}
-        <section id="mission" className="py-20 bg-indigo-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-4xl font-extrabold text-indigo-700 mb-6">
-              Notre Mission
-            </h2>
-            <p className="max-w-3xl mx-auto text-xl text-gray-700 leading-relaxed">
-              Nous nous engageons à fournir des solutions innovantes et éthiques qui propulsent la croissance de nos clients. Notre objectif est de bâtir un écosystème où la technologie et la responsabilité sociale se rencontrent pour un impact positif et durable sur la société.
-            </p>
-            <div className="mt-10">
-              <Link 
-                href="#" 
-                className="text-indigo-600 font-semibold hover:text-indigo-800 transition duration-300"
-              >
-                Lire notre charte complète →
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* 7. Le Directeur Général */}
-        <section id="ceo" className="py-20 bg-gray-900 text-white">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl font-bold mb-10">
-              Mot de la Direction
-            </h2>
-            <div className="flex flex-col md:flex-row items-center md:text-left">
-              <div className="flex-shrink-0 mb-6 md:mb-0 md:mr-8">
-                <Image 
-                  src={mockCEO.imagePlaceholder} 
-                  alt={`Photo de ${mockCEO.nom}`}
-                  width={100}
-                  height={70}
-                  unoptimized
-                  className="w-40 h-40 rounded-full object-cover border-4 border-indigo-500 mx-auto md:mx-0"
-                />
-              </div>
-              <div>
-                <blockquote className="text-2xl italic font-light mb-4">
-                  {mockCEO.citation}
-                </blockquote>
-                <p className="text-xl font-semibold text-indigo-400">
-                  {mockCEO.nom}
-                </p>
-                <p className="text-lg text-gray-400">
-                  {mockCEO.titre}
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-                  
-                </div>
-              </section>
-              {/* FIN DE LA GALERIE */}
-            </main>
-            <Footer />
-        </div>
-    );
-}
+export default HomePage;
